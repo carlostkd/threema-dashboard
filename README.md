@@ -6,6 +6,8 @@ The app provides detailed statistics about your messages, top users, most common
 
 [Live Demo: ](https://spawntec.com/threemaboard/)
 
+![screenshot](threemaboard.png)
+
 ## Features
 
 * Upload Multiple Threema chat files.
