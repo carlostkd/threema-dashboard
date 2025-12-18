@@ -4,6 +4,8 @@ Threema  Dashboad Statistic is a web-based tool that allows you to upload, parse
 
 The app provides detailed statistics about your messages, top users, most common words, and an interactive dashboard for easy navigation.
 
+[Live Demo: ](https://spawntec.com/threemaboard/)
+
 ## Features
 
 * Upload Multiple Threema chat files.
