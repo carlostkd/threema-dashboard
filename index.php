@@ -85,7 +85,7 @@
         .upload-section {
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             border-radius: 24px;
-            padding: 60px 40px;
+            padding: 32px 24px;
             margin-bottom: 40px;
             border: 2px dashed #475569;
             text-align: center;
@@ -106,7 +106,7 @@
         }
 
         .upload-icon {
-            font-size: 5em;
+            font-size: 3.5em;
             margin-bottom: 20px;
             filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
         }
@@ -114,13 +114,13 @@
         .upload-box h2 {
             color: #f1f5f9;
             margin-bottom: 16px;
-            font-size: 1.8em;
+            font-size: 1.4em;
         }
 
         .upload-box p {
             color: #94a3b8;
             margin-bottom: 30px;
-            font-size: 1.1em;
+            font-size: 0.95em;
         }
 
         #fileInput {
@@ -131,9 +131,9 @@
             background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
             color: white;
             border: none;
-            padding: 16px 48px;
+            padding: 12px 32px;
             border-radius: 16px;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -166,27 +166,27 @@
         .search-section {
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             border-radius: 24px;
-            padding: 32px;
+            padding: 20px;
             margin-bottom: 32px;
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
 
         .search-section h3 {
             color: #f1f5f9;
-            margin-bottom: 24px;
-            font-size: 1.5em;
+            margin-bottom: 16px;
+            font-size: 1.2em;
             font-weight: 700;
         }
 
         .search-controls {
             display: grid;
             grid-template-columns: 2fr 2fr 1fr;
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
         .limit-selector {
-            padding: 14px 20px;
+            padding: 10px 14px;
             border: 2px solid #334155;
             border-radius: 12px;
             font-size: 1em;
@@ -228,7 +228,7 @@
         .stat-card {
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             border-radius: 20px;
-            padding: 32px;
+            padding: 20px;
             border: 1px solid rgba(148, 163, 184, 0.1);
             transition: all 0.3s ease;
             position: relative;
@@ -260,7 +260,7 @@
         }
 
         .stat-value {
-            font-size: 3em;
+            font-size: 2.2em;
             font-weight: 800;
             background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
             -webkit-background-clip: text;
@@ -276,15 +276,15 @@
 
         .draggable-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 24px;
-            margin-bottom: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .chart-card {
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             border-radius: 20px;
-            padding: 32px;
+            padding: 20px;
             border: 1px solid rgba(148, 163, 184, 0.1);
             cursor: move;
             transition: all 0.3s ease;
@@ -329,7 +329,7 @@
         }
 
         .top-list li {
-            padding: 16px 20px;
+            padding: 10px 14px;
             margin-bottom: 12px;
             background: #0f172a;
             border-radius: 12px;
@@ -349,16 +349,16 @@
         .user-name {
             font-weight: 600;
             color: #e4e4e7;
-            font-size: 1.05em;
+            font-size: 0.95em;
         }
 
         .count {
             background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
             color: white;
-            padding: 8px 20px;
+            padding: 6px 14px;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.95em;
+            font-size: 0.85em;
         }
 
         .messages-section {
@@ -502,6 +502,22 @@
     opacity: 1;
 }
 
+
+.remind-btn {
+    background: transparent;
+    border: 1px solid #3b82f6;
+    color: #3b82f6;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 0.8em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.remind-btn:hover {
+    background: rgba(59, 130, 246, 0.1);
+}
 
 
 
@@ -758,23 +774,107 @@ function updateStatistics() {
     document.getElementById('uniqueUsers').textContent = users.size;
     displayMessages();
 }
+
 function displayMessages() {
     const messagesList = document.getElementById('messagesList');
     const startIndex = (currentPage - 1) * messagesPerPage;
     const endIndex = startIndex + messagesPerPage;
     const messagesToShow = filteredMessages.slice(startIndex, endIndex);
+
     messagesList.innerHTML = messagesToShow
-        .map(m => `
-            <div class="message-item">
-                <div class="message-header">
-                    <span class="message-user">${escapeHtml(m.user)}</span>
-                    <span class="message-date">${m.date.toLocaleDateString()} ${m.date.toLocaleTimeString()}</span>
+        .map(m => {
+            const timestamp = m.date.getTime();
+
+            return `
+                <div class="message-item">
+                    <div class="message-header">
+                        <span class="message-user">${escapeHtml(m.user)}</span>
+                        <span class="message-date">
+                            ${m.date.toLocaleDateString()} ${m.date.toLocaleTimeString()}
+                        </span>
+                    </div>
+
+                    <button
+                        class="remind-btn"
+                        onclick="downloadReminder(
+                            '${escapeHtml(m.user)}',
+                            '${escapeHtml(m.text)}',
+                            ${timestamp}
+                        )">
+                        ⏰ Remind me
+                    </button>
+
+                    <div class="message-text">${escapeHtml(m.text)}</div>
                 </div>
-                <div class="message-text">${escapeHtml(m.text)}</div>
-            </div>
-        `).join('');
+            `;
+        })
+        .join('');
+
     updatePagination();
 }
+
+
+function downloadReminder(user, text, timestamp) {
+    const startDate = new Date(timestamp);
+    const endDate = new Date(timestamp + 5 * 60 * 1000);
+
+    function formatICSDate(date) {
+        const pad = n => String(n).padStart(2, '0');
+        return (
+            date.getFullYear() +
+            pad(date.getMonth() + 1) +
+            pad(date.getDate()) +
+            'T' +
+            pad(date.getHours()) +
+            pad(date.getMinutes()) +
+            pad(date.getSeconds())
+        );
+    }
+
+    function escapeICS(value) {
+        return value
+            .replace(/\\/g, '\\\\')
+            .replace(/\n/g, '\\n')
+            .replace(/,/g, '\\,')
+            .replace(/;/g, '\\;');
+    }
+
+    const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Threema Dashboard//EN',
+        'BEGIN:VEVENT',
+        `UID:${Date.now()}@threema-dashboard`,
+        `DTSTAMP:${formatICSDate(new Date())}`,
+        `DTSTART:${formatICSDate(startDate)}`,
+        `DTEND:${formatICSDate(endDate)}`,
+        `SUMMARY:${escapeICS('Threema: Message from ' + user)}`,
+        `DESCRIPTION:${escapeICS(text)}`,
+        'BEGIN:VALARM',
+        'TRIGGER:-PT10M',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:Reminder',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].join('\r\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `threema-reminder-${formatICSDate(startDate)}.ics`;
+    document.body.appendChild(a);
+    a.click();
+
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+
+
+
 function updatePagination() {
     const pagination = document.getElementById('pagination');
     const totalPages = Math.ceil(filteredMessages.length / messagesPerPage);
