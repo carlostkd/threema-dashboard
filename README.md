@@ -10,6 +10,7 @@ The app provides detailed statistics about your messages, top users, most common
 
 * Upload Multiple Threema chat files.
 * Automatically parses messages with date, time, user, and content.
+* [NEW] - Save any Message as a Reminder to any Calendar. 
 * Display total messages, sent and received messages, and unique users.
 * Identify the most active users and most commonly used words.
 * Filter messages by user, text, or date.
